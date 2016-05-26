@@ -17,7 +17,8 @@ class App < Sinatra::Base
     response = HTTParty.get('http://programmingexcuses.com/')
     pattern = %r(\<a href="\/" rel="nofollow".*?\>(.*?)\<)
     content = pattern.match(response.body)[1]
-    json message: content
+    json response_type: 'in_channel',
+         text: content
   end
 
   run! if app_file == $PROGRAM_NAME
