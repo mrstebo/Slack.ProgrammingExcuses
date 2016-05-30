@@ -14,11 +14,15 @@ class App < Sinatra::Base
   set :server, :puma
 
   get '/' do
+    send_file 'index.html'
+  end
+
+  post '/' do
     response = HTTParty.get('http://programmingexcuses.com/')
-    pattern = %r(\<a href="\/" rel="nofollow".*?\>(.*?)\<)
-    content = pattern.match(response.body)[1]
-    json response_type: 'in_channel',
-         text: content
+      pattern = %r(\<a href="\/" rel="nofollow".*?\>(.*?)\<)
+      content = pattern.match(response.body)[1]
+      json response_type: 'in_channel',
+           text: content
   end
 
   run! if app_file == $PROGRAM_NAME

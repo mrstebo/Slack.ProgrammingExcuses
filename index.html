@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Slack.ProgrammingExcuses</title>
+    <link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        background-color: #2F3129;
+      }
+      #content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #ffffff;
+        font-family: 'Molengo', Georgia, Times, serif;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h3 id="content">So...you want an excuse, aye?</h3>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+    $(function() {
+      var currentRequests = 0;
+      var maxRequests = 1000;
+      var isDone = true;
+      var interval = setInterval(function() {
+        if (!isDone) {
+          return;
+        }
+
+        isDone = false;
+
+        if (currentRequests++ > maxRequests) {
+          clearInterval(interval);
+        }
+        $.ajax({
+          method: 'POST',
+          url: '/',
+          dataType: 'json',
+          success: function(data, textStatus, xhr) {
+            $('#content').fadeOut(200, function() {
+              $('#content').text(data.text);
+              $('#content').fadeIn(200);
+            });
+          },
+          complete: function() {
+            isDone = true;
+          }
+        });
+      }, 10000);
+    });
+    </script>
+  </body>
+</html>
