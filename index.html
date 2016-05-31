@@ -23,38 +23,58 @@
     </style>
   </head>
   <body>
-    <h3 id="content">So...you want an excuse, aye?</h3>
+    <h3 id="content">Preparing the excuses...</h3>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-    $(function() {
-      var currentRequests = 0;
-      var maxRequests = 1000;
-      var isDone = true;
-      var interval = setInterval(function() {
-        if (!isDone) {
-          return;
+    function getNewExcuse(cb) {
+      $.ajax({
+        method: 'POST',
+        url: '/',
+        dataType: 'json',
+        async: false,
+        success: function(data, textStatus, xhr) {
+          cb(null, data.text)
+          $('#content').fadeOut(200, function() {
+            $('#content').text(data.text);
+            $('#content').fadeIn(200);
+          });
+        },
+        error: function(err) {
+          cb(err);
         }
+      });
+    }
 
-        isDone = false;
+    function updateExcuse(excuse) {
+      $('#content').fadeOut(200, function() {
+        $('#content').text(excuse);
+        $('#content').fadeIn(200);
+      });
+    }
 
+    function run() {
+      getNewExcuse(function(err, excuse) {
+        if (err) {
+          console.error(err);
+        } else {
+          updateExcuse(excuse);
+        }
+      });
+    }
+    </script>
+    <script>
+    var currentRequests = 0;
+    var maxRequests = 1000;
+
+    run();
+
+    $(function() {
+      var interval = setInterval(function() {
         if (currentRequests++ > maxRequests) {
           clearInterval(interval);
         }
-        $.ajax({
-          method: 'POST',
-          url: '/',
-          dataType: 'json',
-          success: function(data, textStatus, xhr) {
-            $('#content').fadeOut(200, function() {
-              $('#content').text(data.text);
-              $('#content').fadeIn(200);
-            });
-          },
-          complete: function() {
-            isDone = true;
-          }
-        });
-      }, 10000);
+        run();
+      }, 8000);
     });
     </script>
   </body>
