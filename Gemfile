@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'sinatra', '1.4.6', require: 'sinatra/base'
-gem 'sinatra-contrib', '1.4.6'
-gem 'rake'
+gem 'sinatra', '2.0.2'
+gem 'sinatra-contrib', '2.0.2'
+gem 'rake', '>= 12.3.3'
 gem 'json'
-gem 'puma'
+gem 'puma', '>= 3.12.4'
 
 gem 'httparty', '0.13.7'
