@@ -2,10 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (2.8.2)
-    httparty (0.13.7)
-      json (~> 1.8)
+    httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    json (1.8.6)
+    json (2.3.0)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     mustermann (1.1.1)
@@ -37,8 +36,8 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  httparty (= 0.13.7)
-  json
+  httparty (= 0.14.0)
+  json (>= 2.3.0)
   puma (>= 3.12.4)
   rake (>= 12.3.3)
   sinatra (= 2.0.2)
