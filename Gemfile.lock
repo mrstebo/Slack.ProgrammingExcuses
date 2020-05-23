@@ -11,7 +11,7 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.2)
-    puma (4.3.3)
+    puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.2)
     rack-protection (2.0.2)
@@ -39,7 +39,7 @@ PLATFORMS
 DEPENDENCIES
   httparty (= 0.13.7)
   json
-  puma (>= 3.12.4)
+  puma (>= 4.3.5)
   rake (>= 12.3.3)
   sinatra (= 2.0.2)
   sinatra-contrib (= 2.0.2)
